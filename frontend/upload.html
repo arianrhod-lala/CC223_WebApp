@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Fit</title>
+
+    <style>
+        body {
+            background: linear-gradient(to bottom, #ff99cc 0%, #9966ff 100%);
+            height: auto;
+            min-height: 100vh;
+            margin: 0;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        input, button {
+            margin: 5px;
+            padding: 10px;
+        }
+
+        .stars {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+        
+        .star {
+            font-size: 30px;
+            color: #ccc;
+            transition: color 0.3s;
+        }
+
+        .star:hover, .star:active {
+            color: gold;
+        }
+    </style>
+</head>
+<body>
+    <h2> Preview Fit </h2>
+    <input type="file" id="fileInput" accept="image">
+    <br>
+    <img id="preview" alt="Fit Preview">
+    <br>
+    <input type="text" id="vibe", placeholder="Vibe Name">
+    <input type="text" id="description", placeholder="Description">
+    
+    <h3> Rate the fit ⭐ </h3>
+    <div class="stars" id="starRating">
+        <span class="star" data-value="1">★</span>
+        <span class="star" data-value="2">★</span>
+        <span class="star" data-value="3">★</span>
+        <span class="star" data-value="4">★</span>
+        <span class="star" data-value="5">★</span>
+    </div>
+    
+    <br>
+    <button onclick="submitFit()">Submit</button>
+
+    <script>
+        let selectedRating = 0;
+
+        // Handle star ratings
+        document.querySelectorAll('.star').forEach(star => {
+            star.addEventListener('click', function (){
+                selectedRating = this.getAttribute('data-value');
+                document.querySelectorAll('.star').forEach(s => s.classList.remove('active'));
+                for (let i = 0; i < selectedRating; i++) {
+                    document.querySelectorAll('.star')[i].classList.add('active');
+                }
+            });
+        });
+
+        // Preview image on file select
+        document.getElementById("fileInput").addEventListener("change", function (event){
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById("preview").src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Submit the chosen fit photo
+        function submitFit() {
+            const vibe = document.getElementById("vibe").value;
+            const description = document.getElementById("description").value;
+            const imageSrc = document.getElementById("preview").src;
+
+            window.opener.postMessage({
+                type: "submitFit",
+                imageSrc,
+                vibe,
+                description,
+                rating: selectedRating
+            }, "*");
+
+            window.close();
+        }
+    </script>
+</body>
+</html>

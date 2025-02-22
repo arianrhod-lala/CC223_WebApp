@@ -1,0 +1,124 @@
+body {
+    background: linear-gradient(to bottom, #ff99cc 0%, #9966ff 100%);
+    height: auto;
+    min-height: 100vh;
+    margin: 0;
+}
+
+h1 {
+    text-align: center;
+    font-display: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+p {
+    text-align: center;
+    font-family: monospace;
+    font-size: small;
+}
+
+.text-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    width: 270px;
+    height: 30px;
+    text-align: center;
+    margin: auto;
+}
+
+.gallery {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    max-width: 80%;
+    margin: auto;
+}   
+
+.gallery img {
+    width: 300px;
+    height: auto;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery img:hover {
+    transform: scale(1.1);
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.fits-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    width: 230px;
+    height: 20px;
+    text-align: center;
+    margin: auto;
+}
+
+button {
+    appearance: button;
+    background-color: #000;
+    background-image: none;
+    border: 1px solid #000;
+    border-radius: 5px;
+    box-shadow: #fff 4px 4px 0 0,#000 4px 4px 0 1px;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: monospace;
+    font-size: small;
+    font-weight: 400;
+    line-height: 20px;
+    margin: 0 5px 10px 0;
+    overflow: visible;
+    padding: 12px 40px;
+    text-align: center;
+    text-transform: none;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+    vertical-align: middle;
+    white-space: nowrap;    
+    justify-content: center;
+    align-items: center;
+}
+
+.upload-random-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}  
+
+.upload-random-button:focus {
+    text-decoration: none;
+}
+
+.upload-random-button:hover {
+    text-decoration: none;
+}
+
+.upload-random-button:active {
+    box-shadow: rgba(0, 0, 0, .125) 0 3px 5px inset;
+    outline: 0;
+}
+
+.upload-random-button:not([disabled]):active {
+    box-shadow: #fff 2px 2px 0 0, #000 2px 2px 0 1px;
+    transform: translate(2px, 2px);
+}
