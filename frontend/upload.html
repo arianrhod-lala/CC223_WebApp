@@ -11,6 +11,27 @@
             height: auto;
             min-height: 100vh;
             margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 350px;
+        }
+
+        h2 {
+            text-align: center;
+            font-display: center;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+        input[type="file"] {
+            display: none;
         }
         
         img {
@@ -18,10 +39,48 @@
             height: auto;
             margin-bottom: 10px;
         }
+        
+        #preview {
+            width: 100%;
+            max-width: 300px;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+            display: none;
+            margin: 10px auto;
+        }
 
-        input, button {
-            margin: 5px;
-            padding: 10px;
+        #vibe, #description {
+            font-family: monospace;
+        }
+
+        .custom-file-upload, button {
+            appearance: button;
+            background-color: #000;
+            background-image: none;
+            border: 1px solid #000;
+            border-radius: 5px;
+            box-shadow: #fff 4px 4px 0 0,#000 4px 4px 0 1px;
+            box-sizing: border-box;
+            color: #fff;
+            cursor: pointer;
+            display: inline-block;
+            font-family: monospace;
+            font-size: small;
+            font-weight: 400;
+            line-height: 20px;
+            margin: 0 5px 10px 0;
+            overflow: visible;
+            padding: 12px 40px;
+            text-align: center;
+            text-transform: none;
+            touch-action: manipulation;
+            user-select: none;
+            -webkit-user-select: none;
+            vertical-align: middle;
+            white-space: nowrap;    
+            justify-content: center;
+            align-items: center;
         }
 
         .stars {
@@ -43,68 +102,31 @@
     </style>
 </head>
 <body>
-    <h2> Preview Fit </h2>
-    <input type="file" id="fileInput" accept="image">
-    <br>
-    <img id="preview" alt="Fit Preview">
-    <br>
-    <input type="text" id="vibe", placeholder="Vibe Name">
-    <input type="text" id="description", placeholder="Description">
-    
-    <h3> Rate the fit ⭐ </h3>
-    <div class="stars" id="starRating">
-        <span class="star" data-value="1">★</span>
-        <span class="star" data-value="2">★</span>
-        <span class="star" data-value="3">★</span>
-        <span class="star" data-value="4">★</span>
-        <span class="star" data-value="5">★</span>
+    <div class="container">
+        <h2> Preview Fit </h2>
+        <label for="file-upload" class="custom-file-upload">
+            <i class="fa fa-cloud-upload"></i> Upload Fit
+        </label>
+        <input id="file-upload" type="file"/>
+        <br>
+        <img id="preview" alt="Fit Preview">
+        <br>
+        <input type="text" id="vibe", placeholder="Vibe Name">
+        <input type="text" id="description", placeholder="Description">
+        
+        <h3> Rate the fit ⭐ </h3>
+        <div class="stars" id="starRating">
+            <span class="star" data-value="1">★</span>
+            <span class="star" data-value="2">★</span>
+            <span class="star" data-value="3">★</span>
+            <span class="star" data-value="4">★</span>
+            <span class="star" data-value="5">★</span>
+        </div>
+
+        <br>
+        <button onclick="submitFit()">Submit</button>
     </div>
     
-    <br>
-    <button onclick="submitFit()">Submit</button>
-
-    <script>
-        let selectedRating = 0;
-
-        // Handle star ratings
-        document.querySelectorAll('.star').forEach(star => {
-            star.addEventListener('click', function (){
-                selectedRating = this.getAttribute('data-value');
-                document.querySelectorAll('.star').forEach(s => s.classList.remove('active'));
-                for (let i = 0; i < selectedRating; i++) {
-                    document.querySelectorAll('.star')[i].classList.add('active');
-                }
-            });
-        });
-
-        // Preview image on file select
-        document.getElementById("fileInput").addEventListener("change", function (event){
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    document.getElementById("preview").src = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-
-        // Submit the chosen fit photo
-        function submitFit() {
-            const vibe = document.getElementById("vibe").value;
-            const description = document.getElementById("description").value;
-            const imageSrc = document.getElementById("preview").src;
-
-            window.opener.postMessage({
-                type: "submitFit",
-                imageSrc,
-                vibe,
-                description,
-                rating: selectedRating
-            }, "*");
-
-            window.close();
-        }
-    </script>
+    <script src="upload.js"></script>
 </body>
 </html>
