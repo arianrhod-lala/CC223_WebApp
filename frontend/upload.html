@@ -7,7 +7,8 @@
 
     <style>
         body {
-            background: linear-gradient(to bottom, #ff99cc 0%, #9966ff 100%);
+            background: rgb(52,19,19);
+            background: linear-gradient(0deg, rgba(52,19,19,1) 0%, rgba(0,0,0,1) 100%);
             height: auto;
             min-height: 100vh;
             margin: 0;
@@ -25,9 +26,14 @@
         }
 
         h2 {
+            color:#fff;
             text-align: center;
             font-display: center;
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+        h3 {
+            color:#fff;
         }
 
         input[type="file"] {
@@ -114,7 +120,7 @@
         <input type="text" id="vibe", placeholder="Vibe Name">
         <input type="text" id="description", placeholder="Description">
         
-        <h3> Rate the fit ⭐ </h3>
+        <h3> Rate fit⭐ </h3>
         <div class="stars" id="starRating">
             <span class="star" data-value="1">★</span>
             <span class="star" data-value="2">★</span>

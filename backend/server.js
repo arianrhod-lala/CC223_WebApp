@@ -41,8 +41,8 @@ app.get('/getImages', (req, res) => {
 });
 
 app.use(express.json());
-
-app.use('/pictures', express.static(path.join(__dirname, 'pictures')));
+app.use(express.static(path.join(__dirname, '../frontend')));
+app.use('/pictures', express.static(path.join(__dirname, '/pictures')));
 
 // Uploading photos 
 app.post('/upload', upload.single('image'), (req, res) => {
@@ -61,12 +61,12 @@ app.post('/upload', upload.single('image'), (req, res) => {
     });
 });
 
-// Test 1
-app.listen(PORT, () => {
-    console.log(`Listening at http://localhost:${PORT}`);
+// Render the index.html starting file for the user
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/index.html'));
 });
 
-// Test 2
-app.get('/', (req, res) => {
-    res.send('Welcome to the Fit Check Server!');
+// Test 
+app.listen(PORT, () => {
+    console.log(`Listening at http://localhost:${PORT}`);
 });

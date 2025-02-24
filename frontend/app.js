@@ -74,6 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     const img = document.createElement('img');
                     img.src = `http://localhost:8000/pictures/${image}`;  
                     img.alt = "Random Fit";
+                    
                     fitContainer.appendChild(img);
     
                     gallery.appendChild(fitContainer);
@@ -84,4 +85,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 gallery.innerHTML = "<p>Error fetching images.</p>";
             });  
     }
+
+    // Automatically randomizes photos when starting the website
+    fetchFits();
 });

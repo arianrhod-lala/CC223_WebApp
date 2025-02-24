@@ -1,17 +1,20 @@
 body {
-    background: linear-gradient(to bottom, #ff99cc 0%, #9966ff 100%);
+    background: rgb(52,19,19);
+    background: linear-gradient(0deg, rgba(52,19,19,1) 0%, rgba(0,0,0,1) 100%);
     height: auto;
     min-height: 100vh;
     margin: 0;
 }
 
 h1 {
+    color: #fff;
     text-align: center;
     font-display: center;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: monospace;
 }
 
 p {
+    color: #fff;
     text-align: center;
     font-family: monospace;
     font-size: small;
@@ -21,7 +24,7 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid black;
+    border: 1px solid white;
     border-radius: 10px;
     padding: 10px;
     width: 270px;
@@ -42,8 +45,7 @@ p {
 
 .gallery img {
     width: 300px;
-    height: auto;
-    max-height: 400px;
+    height: 400px;
     object-fit: cover;
     border-radius: 10px;
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
@@ -59,7 +61,7 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid black;
+    border: 1px solid white;
     border-radius: 10px;
     padding: 10px;
     width: 230px;
