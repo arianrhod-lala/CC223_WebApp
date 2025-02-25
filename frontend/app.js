@@ -54,8 +54,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const gallery = document.getElementById("gallery");
         gallery.innerHTML = "";
 
-        // Use the local IP address of your computer instead of 'localhost'
-        const serverUrl = 'http://192.168.100.76:8000';
+        // Use the local IP address (wifi)
+        const serverUrl = 'http://192.168.100.69:8000';
 
         fetch(`${serverUrl}/getImages`)
             .then(response => {
