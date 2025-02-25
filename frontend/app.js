@@ -50,18 +50,26 @@ document.addEventListener("DOMContentLoaded", function () {
     // Fetch 3 random fits and display
     randomBtn.addEventListener("click", fetchFits);
 
-    function fetchFits(){
+    function fetchFits() {
         const gallery = document.getElementById("gallery");
         gallery.innerHTML = "";
 
-        fetch('http://localhost:8000/getImages')
-            .then(response => response.json())
+        // Use the local IP address of your computer instead of 'localhost'
+        const serverUrl = 'http://192.168.100.76:8000';
+
+        fetch(`${serverUrl}/getImages`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
             .then(imageFiles => {
-                if (imageFiles.length === 0){
+                if (imageFiles.length === 0) {
                     gallery.innerHTML = "<p>No images found.</p>";
                     return;
                 }
-                
+
                 // Shuffle images
                 const shuffledImages = imageFiles.sort(() => 0.5 - Math.random()).slice(0, 3);
 
@@ -69,21 +77,26 @@ document.addEventListener("DOMContentLoaded", function () {
                 shuffledImages.forEach((image) => {
                     const fitContainer = document.createElement('div');
                     fitContainer.classList.add("fit-item");
-    
+
                     // Build the image URL and append to gallery
                     const img = document.createElement('img');
-                    img.src = `http://localhost:8000/pictures/${image}`;  
+                    img.src = `${serverUrl}/pictures/${image}`;
                     img.alt = "Random Fit";
-                    
+
+                    // Add error handling for image loading
+                    img.onerror = () => {
+                        console.error(`Failed to load image: ${img.src}`);
+                        img.alt = "Failed to load image";
+                    };
+
                     fitContainer.appendChild(img);
-    
                     gallery.appendChild(fitContainer);
                 });
             })
             .catch(error => {
                 console.error("Error fetching images:", error);
                 gallery.innerHTML = "<p>Error fetching images.</p>";
-            });  
+            });
     }
 
     // Automatically randomizes photos when starting the website
